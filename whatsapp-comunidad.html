@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nuestra Comunidad de WhatsApp · Jóvenes de las Américas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --crema:       #F8F4EA;
+      --verde-vd:    #00665F;
+      --verde-negro: #061312;
+      --rojo-shema:  #C2362E;
+      --naranja-coro:#E8702A;
+      --dorado:      #F0C94E;
+      --tinta:       #19181F;
+      --blanco-papel:#FFFDF8;
+      --aviso-bg:    #1A2D2B;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: var(--crema);
+      color: var(--tinta);
+      min-height: 100vh;
+    }
+
+    /* ─── HERO ─── */
+    .hero {
+      background: var(--verde-negro);
+      padding: 48px 24px 40px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 70% 30%, rgba(0,102,95,.45) 0%, transparent 65%),
+                  radial-gradient(ellipse at 20% 80%, rgba(194,54,46,.2) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .hero-eyebrow {
+      font-family: 'Poppins', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--dorado);
+      margin-bottom: 16px;
+    }
+    .hero h1 {
+      font-family: 'Permanent Marker', cursive;
+      font-size: clamp(2rem, 7vw, 2.8rem);
+      color: var(--blanco-papel);
+      line-height: 1.15;
+      max-width: 480px;
+      margin: 0 auto 14px;
+    }
+    .hero h1 span { color: var(--dorado); }
+    .hero p {
+      font-size: 15px;
+      color: rgba(255,253,248,.75);
+      max-width: 360px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    /* ─── SECCIONES ─── */
+    .section {
+      padding: 40px 20px;
+      max-width: 540px;
+      margin: 0 auto;
+    }
+    .section-title {
+      font-family: 'Permanent Marker', cursive;
+      font-size: 1.45rem;
+      margin-bottom: 6px;
+    }
+    .section-sub {
+      font-size: 13.5px;
+      color: #5a5a5a;
+      margin-bottom: 24px;
+      line-height: 1.5;
+    }
+
+    /* ─── CHANNEL CARDS (sección fusionada) ─── */
+    .channel-list {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-bottom: 8px;
+    }
+    .ch-card {
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 3px 14px rgba(6,19,18,.08);
+    }
+    .ch-card-header {
+      padding: 15px 18px 13px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .ch-card.avisos .ch-card-header { background: var(--aviso-bg); }
+    .ch-card.dabar  .ch-card-header { background: var(--verde-vd); }
+    .ch-card.shema  .ch-card-header { background: var(--rojo-shema); }
+
+    .ch-emoji { font-size: 1.7rem; line-height: 1; flex-shrink: 0; }
+
+    .ch-header-text { flex: 1; }
+    .ch-header-text h2 {
+      font-family: 'Permanent Marker', cursive;
+      font-size: 1.15rem;
+      color: var(--blanco-papel);
+      line-height: 1.2;
+      margin-bottom: 2px;
+    }
+    .ch-header-text p {
+      font-size: 12px;
+      color: rgba(255,253,248,.7);
+      line-height: 1.4;
+    }
+    .ch-access-badge {
+      flex-shrink: 0;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      padding: 4px 9px;
+      border-radius: 100px;
+    }
+    .ch-card.avisos .ch-access-badge { background: var(--dorado); color: var(--tinta); }
+    .ch-card.dabar  .ch-access-badge { background: rgba(255,253,248,.2); color: var(--blanco-papel); }
+    .ch-card.shema  .ch-access-badge { background: rgba(255,253,248,.2); color: var(--blanco-papel); }
+
+    .ch-card-body {
+      background: var(--blanco-papel);
+      padding: 14px 18px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+    .ch-row {
+      display: flex;
+      gap: 9px;
+      align-items: flex-start;
+      font-size: 13.5px;
+      color: var(--tinta);
+      line-height: 1.5;
+    }
+    .ch-row-icon { flex-shrink: 0; font-size: 14px; margin-top: 1px; }
+    .ch-divider {
+      height: 1px;
+      background: rgba(0,0,0,.06);
+      margin: 4px 0;
+    }
+
+    /* ─── (CSS antiguo — conservado temporalmente) ─── */
+    .community-diagram {
+      background: var(--blanco-papel);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(6,19,18,.09);
+      margin-bottom: 32px;
+    }
+    .diagram-header {
+      background: var(--aviso-bg);
+      padding: 18px 20px 14px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .diagram-header .icon {
+      width: 40px; height: 40px;
+      background: var(--verde-vd);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+    .diagram-header .label {
+      font-family: 'Poppins', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--blanco-papel);
+    }
+    .diagram-header .sublabel {
+      font-size: 11.5px;
+      color: rgba(255,253,248,.55);
+      margin-top: 1px;
+    }
+    .diagram-body {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    /* Nodo de grupo */
+    .group-node {
+      border-radius: 14px;
+      overflow: hidden;
+      border: 2px solid transparent;
+    }
+    .group-node.dabar   { border-color: var(--verde-vd); }
+    .group-node.shema   { border-color: var(--rojo-shema); }
+    .group-node.avisos  { border-color: var(--dorado); }
+
+    .group-node-header {
+      padding: 12px 16px 10px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .group-node.dabar  .group-node-header { background: rgba(0,102,95,.12); }
+    .group-node.shema  .group-node-header { background: rgba(194,54,46,.10); }
+    .group-node.avisos .group-node-header { background: rgba(240,201,78,.15); }
+
+    .node-icon { font-size: 18px; }
+    .node-name {
+      font-family: 'Poppins', sans-serif;
+      font-size: 13.5px;
+      font-weight: 700;
+    }
+    .group-node.dabar  .node-name { color: var(--verde-vd); }
+    .group-node.shema  .node-name { color: var(--rojo-shema); }
+    .group-node.avisos .node-name { color: #8a6e00; }
+
+    .node-badge {
+      margin-left: auto;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 100px;
+    }
+    .group-node.dabar  .node-badge { background: var(--verde-vd); color: #fff; }
+    .group-node.shema  .node-badge { background: var(--rojo-shema); color: #fff; }
+    .group-node.avisos .node-badge { background: var(--dorado); color: var(--tinta); }
+
+    .group-node-body {
+      background: var(--blanco-papel);
+      padding: 10px 16px 14px;
+    }
+    .access-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12.5px;
+      color: #555;
+      padding: 4px 0;
+      border-bottom: 1px solid rgba(0,0,0,.05);
+    }
+    .access-row:last-child { border-bottom: none; }
+    .access-icon { font-size: 14px; flex-shrink: 0; }
+
+    /* ─── CARDS DE GRUPOS ─── */
+    .cards-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+    .card {
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 3px 14px rgba(6,19,18,.08);
+    }
+    .card-top {
+      padding: 18px 20px 14px;
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+    }
+    .card.dabar  .card-top { background: var(--verde-vd); }
+    .card.shema  .card-top { background: var(--rojo-shema); }
+    .card.avisos .card-top { background: var(--aviso-bg); }
+
+    .card-emoji {
+      font-size: 2rem;
+      line-height: 1;
+      flex-shrink: 0;
+    }
+    .card-top-text h2 {
+      font-family: 'Permanent Marker', cursive;
+      font-size: 1.25rem;
+      color: var(--blanco-papel);
+      line-height: 1.2;
+      margin-bottom: 3px;
+    }
+    .card-top-text p {
+      font-size: 12.5px;
+      color: rgba(255,253,248,.75);
+      line-height: 1.5;
+    }
+    .card-body {
+      background: var(--blanco-papel);
+      padding: 16px 20px 20px;
+    }
+    .card-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .07em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 100px;
+      margin-bottom: 12px;
+    }
+    .card.dabar  .card-pill { background: rgba(0,102,95,.12); color: var(--verde-vd); }
+    .card.shema  .card-pill { background: rgba(194,54,46,.1); color: var(--rojo-shema); }
+    .card.avisos .card-pill { background: rgba(240,201,78,.2); color: #7a5f00; }
+
+    .feature-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .feature-list li {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      font-size: 14px;
+      color: var(--tinta);
+      line-height: 1.5;
+    }
+    .feature-list li .bullet {
+      flex-shrink: 0;
+      width: 22px; height: 22px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px;
+      margin-top: 1px;
+    }
+    .card.dabar  .feature-list li .bullet { background: rgba(0,102,95,.13); color: var(--verde-vd); }
+    .card.shema  .feature-list li .bullet { background: rgba(194,54,46,.1);  color: var(--rojo-shema); }
+    .card.avisos .feature-list li .bullet { background: rgba(240,201,78,.25);color: #7a5f00; }
+
+    /* ─── SECCIÓN ACCESO: QUIÉN PUEDE VER QUÉ ─── */
+    .access-table {
+      background: var(--blanco-papel);
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 3px 14px rgba(6,19,18,.07);
+      margin-bottom: 32px;
+    }
+    .access-table-header {
+      background: var(--verde-negro);
+      padding: 14px 20px;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      gap: 4px;
+    }
+    .access-table-header span {
+      font-size: 11px;
+      font-weight: 700;
+      color: rgba(255,253,248,.55);
+      text-align: center;
+      letter-spacing: .05em;
+    }
+    .access-table-header span:first-child { text-align: left; }
+    .access-row-table {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      gap: 4px;
+      padding: 12px 20px;
+      border-bottom: 1px solid rgba(0,0,0,.05);
+      align-items: center;
+    }
+    .access-row-table:last-child { border-bottom: none; }
+    .access-row-table:nth-child(even) { background: rgba(248,244,234,.5); }
+    .access-row-label {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--tinta);
+    }
+    .access-check {
+      text-align: center;
+      font-size: 16px;
+    }
+
+    /* ─── BANNER INFOGRAFÍA ─── */
+    .banner-link {
+      display: block;
+      background: linear-gradient(135deg, var(--verde-negro) 0%, var(--verde-vd) 100%);
+      border-radius: 18px;
+      padding: 24px 22px;
+      text-decoration: none;
+      margin-bottom: 12px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 4px 18px rgba(6,19,18,.15);
+    }
+    .banner-link::after {
+      content: '→';
+      position: absolute;
+      right: 22px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 22px;
+      color: var(--dorado);
+      font-weight: 900;
+    }
+    .banner-link::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 80% 50%, rgba(240,201,78,.12) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .banner-eyebrow {
+      font-family: 'Poppins', sans-serif;
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--dorado);
+      margin-bottom: 6px;
+    }
+    .banner-link h3 {
+      font-family: 'Permanent Marker', cursive;
+      font-size: 1.2rem;
+      color: var(--blanco-papel);
+      line-height: 1.25;
+      max-width: 240px;
+    }
+    .banner-link p {
+      font-size: 13px;
+      color: rgba(255,253,248,.68);
+      margin-top: 6px;
+      max-width: 240px;
+      line-height: 1.5;
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: var(--verde-negro);
+      padding: 28px 20px;
+      text-align: center;
+    }
+    footer p {
+      font-size: 12px;
+      color: rgba(255,253,248,.45);
+      line-height: 1.6;
+    }
+    footer strong {
+      color: rgba(255,253,248,.7);
+    }
+
+    /* ─── SEPARADOR ─── */
+    .divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(0,102,95,.2), transparent);
+      margin: 0 20px;
+    }
+
+    /* ─── NOTA AL PIE DE SECCIÓN ─── */
+    .note {
+      background: rgba(240,201,78,.12);
+      border-left: 3px solid var(--dorado);
+      border-radius: 0 10px 10px 0;
+      padding: 12px 16px;
+      font-size: 13px;
+      color: #5a4a00;
+      line-height: 1.55;
+      margin-top: 16px;
+    }
+
+    /* ─── SECCIÓN HORARIOS ─── */
+    .schedule-block {
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 3px 14px rgba(6,19,18,.08);
+      margin-bottom: 16px;
+    }
+    .schedule-header {
+      padding: 16px 20px 13px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .schedule-block.shema .schedule-header { background: var(--rojo-shema); }
+    .schedule-block.dabar .schedule-header { background: var(--verde-vd); }
+
+    .schedule-header-text h3 {
+      font-family: 'Permanent Marker', cursive;
+      font-size: 1.15rem;
+      color: var(--blanco-papel);
+      line-height: 1.2;
+      margin-bottom: 2px;
+    }
+    .schedule-header-text p {
+      font-size: 12px;
+      color: rgba(255,253,248,.7);
+    }
+    .schedule-header-emoji {
+      font-size: 1.8rem;
+      line-height: 1;
+      flex-shrink: 0;
+    }
+
+    .schedule-body {
+      background: var(--blanco-papel);
+      padding: 16px 20px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .schedule-item {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      padding: 12px 14px;
+      border-radius: 12px;
+      background: var(--crema);
+    }
+    .schedule-item.pending {
+      background: rgba(240,201,78,.08);
+      border: 1.5px dashed rgba(240,201,78,.5);
+    }
+    .schedule-item-icon {
+      font-size: 1.3rem;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .schedule-item-content {
+      flex: 1;
+    }
+    .schedule-item-title {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: var(--tinta);
+      margin-bottom: 2px;
+    }
+    .schedule-item-detail {
+      font-size: 13px;
+      color: #4a4a4a;
+      line-height: 1.5;
+    }
+    .schedule-item.pending .schedule-item-detail {
+      color: #7a6a00;
+    }
+    .badge-pending {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      background: rgba(240,201,78,.3);
+      color: #6a5500;
+      padding: 2px 8px;
+      border-radius: 100px;
+      margin-top: 4px;
+    }
+    .badge-confirmed {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      background: rgba(0,102,95,.12);
+      color: var(--verde-vd);
+      padding: 2px 8px;
+      border-radius: 100px;
+      margin-top: 4px;
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+      .card, .banner-link {
+        transition: transform .15s ease, box-shadow .15s ease;
+      }
+      .card:hover, .banner-link:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 22px rgba(6,19,18,.13);
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">Jóvenes de las Américas · Verbum Dei</div>
+  <h1>Nuestra comunidad<br>de <span>WhatsApp</span></h1>
+  <p>Todo lo que necesitas saber para no perderte nada y saber dónde pasa cada cosa.</p>
+</div>
+
+<!-- SECCIÓN 1: LOS TRES ESPACIOS (fusionada) -->
+<div class="section">
+  <div class="section-title">¿Cómo está organizado?</div>
+  <div class="section-sub">La comunidad tiene tres espacios. Cada uno tiene su función y su propio acceso.</div>
+
+  <div class="channel-list">
+
+    <!-- CANAL DE AVISOS -->
+    <div class="ch-card avisos">
+      <div class="ch-card-header">
+        <div class="ch-emoji">📢</div>
+        <div class="ch-header-text">
+          <h2>Canal de avisos</h2>
+          <p>Solo los admins publican · cualquiera puede leer</p>
+        </div>
+        <span class="ch-access-badge">🔓 Abierto</span>
+      </div>
+      <div class="ch-card-body">
+        <div class="ch-row"><span class="ch-row-icon">🎪</span><span>Eventos de otros grupos y de la comunidad Verbum Dei.</span></div>
+        <div class="ch-row"><span class="ch-row-icon">🎙️</span><span>Conferencias y encuentros de interés general — como el encuentro con el Papa.</span></div>
+        <div class="ch-row"><span class="ch-row-icon">🎉</span><span>Festivales del Verbum Dei — como el aniversario del fundador.</span></div>
+      </div>
+    </div>
+
+    <!-- GRUPO SHEMÁ -->
+    <div class="ch-card shema">
+      <div class="ch-card-header">
+        <div class="ch-emoji">👂</div>
+        <div class="ch-header-text">
+          <h2>Grupo Shemá <span style="font-family:sans-serif;font-size:.8rem;opacity:.8;">שמע</span></h2>
+          <p>Universitarios · todos pueden escribir</p>
+        </div>
+        <span class="ch-access-badge">🔒 Miembros</span>
+      </div>
+      <div class="ch-card-body">
+        <div class="ch-row"><span class="ch-row-icon">🗓️</span><span>Fechas y horarios de los encuentros del grupo.</span></div>
+        <div class="ch-row"><span class="ch-row-icon">🏕️</span><span>Organización de convivencias, voluntariado y la Pascua.</span></div>
+        <div class="ch-row"><span class="ch-row-icon">🎉</span><span>Excursión o encuentro de fin de curso.</span></div>
+        <div class="ch-divider"></div>
+        <div class="ch-row"><span class="ch-row-icon">💬</span><span style="color:#777;font-size:13px;">Todo lo del día a día — sin que se pierda entre otros avisos.</span></div>
+      </div>
+    </div>
+
+    <!-- GRUPO DABAR -->
+    <div class="ch-card dabar">
+      <div class="ch-card-header">
+        <div class="ch-emoji">🌿</div>
+        <div class="ch-header-text">
+          <h2>Grupo Dabar <span style="font-family:sans-serif;font-size:.8rem;opacity:.8;">דבר</span></h2>
+          <p>Jóvenes en edad laboral · todos pueden escribir</p>
+        </div>
+        <span class="ch-access-badge">🔒 Miembros</span>
+      </div>
+      <div class="ch-card-body">
+        <div class="ch-row"><span class="ch-row-icon">🗓️</span><span>Fechas y horarios de los encuentros del grupo.</span></div>
+        <div class="ch-row"><span class="ch-row-icon">🏕️</span><span>Organización de convivencias y la Pascua.</span></div>
+        <div class="ch-row"><span class="ch-row-icon">🥾</span><span>Coordinación de actividades propias — como el Camino de Santiago.</span></div>
+        <div class="ch-divider"></div>
+        <div class="ch-row"><span class="ch-row-icon">💬</span><span style="color:#777;font-size:13px;">Todo lo del día a día — sin que se pierda entre otros avisos.</span></div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="note">
+    💡 <strong>¿Para qué sirve separarlo?</strong> Así cada mensaje llega a quien le importa. Los avisos generales no invaden la conversación del grupo, y lo que es tuyo no se pierde entre noticias de fuera.
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- SECCIÓN 3: HORARIOS Y CITAS -->
+<div class="section">
+  <div class="section-title">¿Cuándo nos juntamos?</div>
+  <div class="section-sub">Los horarios del curso 2026–27 se confirman en septiembre. Aquí los tendrás actualizados.</div>
+
+  <!-- SHEMÁ -->
+  <div class="schedule-block shema">
+    <div class="schedule-header">
+      <div class="schedule-header-emoji">👂</div>
+      <div class="schedule-header-text">
+        <h3>Shemá שמע</h3>
+        <p>Universitarios · cada dos semanas</p>
+      </div>
+    </div>
+    <div class="schedule-body">
+
+      <div class="schedule-item pending">
+        <div class="schedule-item-icon">🗓️</div>
+        <div class="schedule-item-content">
+          <div class="schedule-item-title">Reuniones del grupo</div>
+          <div class="schedule-item-detail">Un domingo cada quince días.<br>Horario por confirmar para septiembre 2026.</div>
+          <span class="badge-pending">Por confirmar</span>
+        </div>
+      </div>
+
+      <div class="schedule-item pending">
+        <div class="schedule-item-icon">⛪</div>
+        <div class="schedule-item-content">
+          <div class="schedule-item-title">Misa joven</div>
+          <div class="schedule-item-detail">Domingos alternos a las 19:30h.<br>El grupo se queda antes o después — por confirmar.</div>
+          <span class="badge-pending">Por confirmar</span>
+        </div>
+      </div>
+
+      <div class="schedule-item">
+        <div class="schedule-item-icon">🌿</div>
+        <div class="schedule-item-content">
+          <div class="schedule-item-title">Convivencias y Pascua</div>
+          <div class="schedule-item-detail">Un par de convivencias durante el curso, y la Pascua — compartidas con Dabar.</div>
+          <span class="badge-confirmed">Se anuncian en el grupo</span>
+        </div>
+      </div>
+
+      <div class="schedule-item">
+        <div class="schedule-item-icon">🎉</div>
+        <div class="schedule-item-content">
+          <div class="schedule-item-title">Encuentro o excursión de fin de curso</div>
+          <div class="schedule-item-detail">Para cerrar el año juntos. Se organiza al final del curso.</div>
+          <span class="badge-confirmed">Se anuncian en el grupo</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- DABAR -->
+  <div class="schedule-block dabar">
+    <div class="schedule-header">
+      <div class="schedule-header-emoji">🌿</div>
+      <div class="schedule-header-text">
+        <h3>Dabar דבר</h3>
+        <p>Jóvenes en edad laboral · hasta los 30</p>
+      </div>
+    </div>
+    <div class="schedule-body">
+
+      <div class="schedule-item pending">
+        <div class="schedule-item-icon">🗓️</div>
+        <div class="schedule-item-content">
+          <div class="schedule-item-title">Reuniones del grupo</div>
+          <div class="schedule-item-detail">Frecuencia y horario por confirmar para septiembre 2026.</div>
+          <span class="badge-pending">Por confirmar</span>
+        </div>
+      </div>
+
+      <div class="schedule-item pending">
+        <div class="schedule-item-icon">⛪</div>
+        <div class="schedule-item-content">
+          <div class="schedule-item-title">Misa joven</div>
+          <div class="schedule-item-detail">Domingos alternos a las 19:30h.<br>Ensayo del coro a las 19:00h.</div>
+          <span class="badge-confirmed">Confirmado</span>
+        </div>
+      </div>
+
+      <div class="schedule-item">
+        <div class="schedule-item-icon">🌿</div>
+        <div class="schedule-item-content">
+          <div class="schedule-item-title">Convivencias y Pascua</div>
+          <div class="schedule-item-detail">Un par de convivencias durante el curso, y la Pascua — compartidas con Shemá.</div>
+          <span class="badge-confirmed">Se anuncian en el grupo</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="note">
+    📲 <strong>¿Cuándo se confirma todo?</strong> En septiembre, al empezar el curso. Cuando lo sepamos, actualizamos esta página — el enlace y el QR siguen siendo los mismos.
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- SECCIÓN 5: TABLA DE ACCESO -->
+<div class="section">
+  <div class="section-title">¿Quién puede acceder a qué?</div>
+  <div class="section-sub">Un vistazo rápido para no perderte.</div>
+
+  <div class="access-table">
+    <div class="access-table-header">
+      <span>Espacio</span>
+      <span>Dabar</span>
+      <span>Shemá</span>
+      <span>Cualquiera</span>
+    </div>
+    <div class="access-row-table">
+      <span class="access-row-label">📢 Canal de avisos</span>
+      <span class="access-check">✅</span>
+      <span class="access-check">✅</span>
+      <span class="access-check">✅</span>
+    </div>
+    <div class="access-row-table">
+      <span class="access-row-label">🌿 Grupo Dabar</span>
+      <span class="access-check">✅</span>
+      <span class="access-check">❌</span>
+      <span class="access-check">❌</span>
+    </div>
+    <div class="access-row-table">
+      <span class="access-row-label">👂 Grupo Shemá</span>
+      <span class="access-check">❌</span>
+      <span class="access-check">✅</span>
+      <span class="access-check">❌</span>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- SECCIÓN 6: ENLACE A INFOGRAFÍA PRINCIPAL -->
+<div class="section">
+  <div class="section-title">¿Quieres saber más?</div>
+  <div class="section-sub">Descubre todos los espacios del grupo de jóvenes: Dabar, Shemá y el Coro Joven.</div>
+
+  <a class="banner-link" href="https://joveneslasamericas.github.io/grupo-jovenes/" target="_blank" rel="noopener">
+    <div class="banner-eyebrow">Jóvenes de las Américas</div>
+    <h3>Conoce el grupo de jóvenes completo</h3>
+    <p>Dabar · Shemá · Coro Joven<br>Todo lo que hacemos y cómo unirte.</p>
+  </a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p><strong>Jóvenes de las Américas</strong><br>Parroquia Nuestra Señora de las Américas · Verbum Dei<br>Calle Espirea, 3</p>
+</footer>
+
+</body>
+</html>
