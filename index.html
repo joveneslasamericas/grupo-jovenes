@@ -886,34 +886,54 @@
 (function(){
   var track = document.querySelector('.cards');
   if(!track) return;
-  var isDown = false, startX = 0, startScroll = 0, moved = false;
+  var isDown = false, dragging = false, startX = 0, startY = 0, startScroll = 0, moved = false;
+  var mq = window.matchMedia('(min-width:560px)');
 
-  function start(pageX){
+  // Only hijack the gesture when there's an actual horizontal row to drag
+  // (on mobile the cards stack vertically, so normal page scroll must pass through untouched).
+  function canDrag(){
+    return mq.matches && track.scrollWidth > track.clientWidth + 1;
+  }
+
+  function start(pageX, pageY){
+    if(!canDrag()) return;
     isDown = true;
+    dragging = false;
     moved = false;
-    track.classList.add('dragging');
     startX = pageX;
+    startY = pageY;
     startScroll = track.scrollLeft;
   }
-  function move(pageX, evt){
+  function move(pageX, pageY, evt){
     if(!isDown) return;
     var dx = pageX - startX;
-    if(Math.abs(dx) > 4) moved = true;
+    var dy = pageY - startY;
+    if(!dragging){
+      if(Math.abs(dx) < 6 && Math.abs(dy) < 6) return;
+      if(Math.abs(dy) > Math.abs(dx)){
+        // gesture is more vertical than horizontal: let the page scroll normally
+        isDown = false;
+        return;
+      }
+      dragging = true;
+      moved = true;
+      track.classList.add('dragging');
+    }
     if(evt && evt.cancelable) evt.preventDefault();
     track.scrollLeft = startScroll - dx;
   }
   function end(){
     isDown = false;
+    dragging = false;
     track.classList.remove('dragging');
   }
 
-  track.addEventListener('mousedown', function(e){ start(e.pageX); });
-  window.addEventListener('mousemove', function(e){ move(e.pageX, e); });
+  track.addEventListener('mousedown', function(e){ start(e.pageX, e.pageY); });
+  window.addEventListener('mousemove', function(e){ move(e.pageX, e.pageY, e); });
   window.addEventListener('mouseup', end);
-  track.addEventListener('mouseleave', function(){ if(!isDown) return; });
 
-  track.addEventListener('touchstart', function(e){ start(e.touches[0].pageX); }, {passive:true});
-  track.addEventListener('touchmove', function(e){ move(e.touches[0].pageX, e); }, {passive:false});
+  track.addEventListener('touchstart', function(e){ start(e.touches[0].pageX, e.touches[0].pageY); }, {passive:true});
+  track.addEventListener('touchmove', function(e){ move(e.touches[0].pageX, e.touches[0].pageY, e); }, {passive:false});
   track.addEventListener('touchend', end);
 
   // avoid triggering a card click right after a drag
