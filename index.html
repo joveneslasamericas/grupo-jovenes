@@ -397,7 +397,14 @@
     padding:18px 18px 18px 16px;
     border:2.5px solid var(--ink);
     box-shadow:5px 5px 0 var(--ink);
+    transition:transform 0.18s ease, box-shadow 0.18s ease;
   }
+  .month-card.sab, .month-card.dom, .month-card.daily{ cursor:pointer; }
+  .month-card.sab:active, .month-card.dom:active, .month-card.daily:active{
+    transform:translate(2px,2px);
+    box-shadow:3px 3px 0 var(--ink);
+  }
+  .month-card.variable:active{ transform:none; }
   .month-card.variable{
     border-style:dashed;
     border-width:2px;
@@ -693,6 +700,10 @@
         <span class="month-eyebrow">Cada día</span>
         <b>Una pauta para orar 10 minutos</b>
         <span>Un mensaje por WhatsApp para seguir la verdad de fe del mes, día a día.</span>
+        <div class="schedule-ready">
+          <!-- [EDITAR: aquí probablemente irá el enlace al canal de WhatsApp desde el que Víctor manda las pautas diarias] -->
+          💬 Próximamente
+        </div>
       </div>
     </div>
 
